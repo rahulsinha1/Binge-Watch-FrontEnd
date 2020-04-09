@@ -1,9 +1,19 @@
-import React, { useState , useEffect} from 'react';
-import {Grid, Paper,Checkbox} from '@material-ui/core';
-import {TableContainer,Table,TableBody,TableCell,TableHead,TableRow} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Grid, Paper, Checkbox } from "@material-ui/core";
+import {
+  TableContainer,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import ContainedButtons from "./button";
+import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import LoginPage from "./components/login";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,30 +21,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function App() {
   const [userList, setUserList] = useState([]);
   const classes = useStyles();
 
   function getUserList() {
-    axios.get("http://localhost:8080/api/user/description")
-    .then(function(response) {
-      console.log(response);
-      setUserList([].concat(response['data']))
-    })
-    .catch(function(error){
-      console.log(error);
-    });
+    axios
+      .get("http://localhost:8080//api/users/select/all")
+      .then(function (response) {
+        console.log(response);
+        setUserList([].concat(response["data"]));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
     getUserList();
   }, []);
-  
-  const colums=[
-      {key: 'column1', name:'UserName', fileName: 'userName', minWidth: 100, maxWidth: 200, isResizable: true},
-      {key: 'column2', name:'Password', fileName: 'passWord', minWidth: 100, maxWidth: 200, isResizable: true},
-    ];
 
 
   return (
@@ -50,19 +55,21 @@ function App() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                  {userList.map((row) => (
-                    <TableRow key={row['userName']}>
-                      <TableCell component="th" scope="row">{row['userName']}</TableCell>
-                      <TableCell>{row['password']}</TableCell>
-                    </TableRow>
-                  ))}
+                {userList.map((row) => (
+                  <TableRow key={row["userName"]}>
+                    <TableCell component="th" scope="row">
+                      {row["userName"]}
+                    </TableCell>
+                    <TableCell>{row["password"]}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
+          <LoginPage />
         </Grid>
       </Grid>
     </div>
-      
   );
 }
 
