@@ -14,6 +14,8 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import LoginPage from "./components/login";
+import MovieFun from "./components/movie.js";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +43,6 @@ function App() {
     getUserList();
   }, []);
 
-
   return (
     <div className={classes.root}>
       <Grid container justify="center">
@@ -67,7 +68,11 @@ function App() {
             </Table>
           </TableContainer>
           <LoginPage />
+          <Button href="/movie" variant="contained" >
+        movie
+      </Button>
         </Grid>
+        
       </Grid>
     </div>
   );

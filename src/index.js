@@ -6,6 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import ContainedButtons from "./button";
 import SignUpPage from "./components/register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import MovieFun from "./components/movie";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,9 @@ ReactDOM.render(
         </Route>
         <Route path="/signup">
           <SignUpPage />
+        </Route>
+        <Route path="/movie">
+          <MovieFun/>
         </Route>
       </Switch>
     </Router>

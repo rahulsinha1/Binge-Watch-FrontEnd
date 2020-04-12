@@ -12,9 +12,9 @@ export default function SignUpPage() {
     axios
       .get(
         "http://localhost:8080/api/user/insert/" +
-          params["userName"] +
+          params["user"] +
           "/" +
-          params["passWord"]
+          params["pass"]
       )
       .then(function (response) {
         console.log(response);
@@ -40,7 +40,7 @@ export default function SignUpPage() {
               >
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                   <TextField
-                    name="userName"
+                    name="user"
                     id="standard-basic"
                     label="User Name"
                     fullwidth="true"
@@ -49,7 +49,7 @@ export default function SignUpPage() {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                   <TextField
-                    name="passWord"
+                    name="pass"
                     id="standard-basic"
                     label="Password"
                     fullwidth="true"
