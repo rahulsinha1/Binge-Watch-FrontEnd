@@ -7,6 +7,7 @@ import ContainedButtons from "./button";
 import SignUpPage from "./components/register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MovieFun from "./components/movie";
+import MovieDetail from "./components/movieDetail";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,9 @@ ReactDOM.render(
         </Route>
         <Route path="/movie">
           <MovieFun/>
+        </Route>
+        <Route path="/movieDetail">
+          <MovieDetail/>
         </Route>
       </Switch>
     </Router>
