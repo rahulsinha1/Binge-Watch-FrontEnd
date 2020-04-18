@@ -47,7 +47,7 @@ export default function SignUpPage() {
                     inputRef={register}
                   />
                 </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12}>
+                <Grid item xs={12}  sm={12} md={12} lg={12}>
                   <TextField
                     name="pass"
                     id="standard-basic"

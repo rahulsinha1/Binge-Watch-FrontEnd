@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 750,
-    transform: "translateZ(0)",
+    width: 600,
+    // height: 750,
+    // transform: "translateZ(0)",
   },
   titleBar: {
     background:
@@ -126,7 +126,9 @@ export default function MovieFun() {
               cols={row.featured ? 2 : 1}
               rows={row.featured ? 2 : 1}
             >
-              <img src={row["poster"]} alt={row["name"]} />
+              <a href="/moviedetail">
+                <img src={row["poster"]} alt={row["name"]} />
+              </a>
               <GridListTileBar
                 title={row["name"]}
                 titlePosition="top"
