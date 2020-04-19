@@ -8,6 +8,8 @@ import SignUpPage from "./components/register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MovieFun from "./components/movie";
 import MovieDetail from "./components/movieDetail";
+import LoginPage from "./components/login";
+import UserList from "./components/userList";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,10 +22,18 @@ ReactDOM.render(
           <SignUpPage />
         </Route>
         <Route path="/movie">
-          <MovieFun/>
+          <MovieFun />
         </Route>
-        <Route path="/movieDetail">
-          <MovieDetail/>
+        <Route
+          exact
+          path="/movieDetail/:name"
+          component={(props) => <MovieDetail name={props.match.params.name} />}
+        ></Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/userList">
+          <UserList />
         </Route>
       </Switch>
     </Router>

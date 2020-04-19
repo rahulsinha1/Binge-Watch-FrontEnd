@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, TextField, Button, makeStyles } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {
@@ -9,19 +9,20 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow,
+  TablemovieDetail,
   Paper,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGmovieDetail: 1,
   },
 }));
 
-export default function MovieFun() {
+export default function MovieFun(name) {
   const { handleSubmit, register } = useForm();
   const [movieList, setMovieList] = useState([]);
+  const [movieDetail, setMovieDetail] = useState({});
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
 
@@ -42,7 +43,7 @@ export default function MovieFun() {
       .get("http://localhost:8080/api/movies/find/?name=" + params["name"])
       .then(function (response) {
         console.log(response);
-        setRedirect(true);
+        setMovieDetail(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -50,63 +51,54 @@ export default function MovieFun() {
   }
 
   useEffect(() => {
-    getMovieList();
+    console.log(name);
+    search(name);
   }, []);
 
-  if (redirect) {
-    return <Redirect to="/movie" />;
-  } else {
-    return (
-      <div class="container-fluid app-container" className={classes.root}>
-        <Grid container justify="center">
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <h3>
-              {movieList.map((row) => (
-                <text key={row["name"]}>
-                  <h1>{row["name"]}</h1>
-                  <img src={row["poster"]} alt={row["name"]} />
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    Country:      <h10>{row["country"]}</h10>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    IMDB rating:     <h9>{row["imdbRating"]}</h9>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    Type:   <h9>{row["type"]}</h9>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                  Genre: <h9>{row["genre"]}</h9>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    Year: <h9>{row["year"]}</h9>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    Director: <h9>{row["director"]}</h9>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    Lenght: <h9>{row["runtime"]}</h9>{" "}
-                  </text>
-                  <br></br>
-                  <text style={{ flexShrink: 2 }}>
-                    Introduction: <text>{row["storyLine"]}</text>{" "}
-                  </text>
-
-                </text>
-                )
-                )}
-            </h3>
-
-
-          </Grid>
+  return (
+    <div class="container-fluid app-container" className={classes.root}>
+      <Grid container justify="center">
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <h3>
+            <text key={movieDetail["name"]}>
+              <h1>{movieDetail["name"]}</h1>
+              <img src={movieDetail["poster"]} alt={movieDetail["name"]} />
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Country: <h10>{movieDetail["country"]}</h10>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                IMDB rating: <h9>{movieDetail["imdbRating"]}</h9>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Type: <h9>{movieDetail["type"]}</h9>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Genre: <h9>{movieDetail["genre"]}</h9>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Year: <h9>{movieDetail["year"]}</h9>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Director: <h9>{movieDetail["director"]}</h9>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Lenght: <h9>{movieDetail["runtime"]}</h9>{" "}
+              </text>
+              <br></br>
+              <text style={{ flexShrink: 2 }}>
+                Introduction: <text>{movieDetail["storyLine"]}</text>{" "}
+              </text>
+            </text>
+          </h3>
         </Grid>
-      </div>
-    );
-  }
+      </Grid>
+    </div>
+  );
 }

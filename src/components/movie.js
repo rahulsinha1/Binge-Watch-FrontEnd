@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route, Link } from "react-router-dom";
 import {
   Grid,
   TextField,
@@ -22,6 +23,7 @@ import {
   GridListTileBar,
 } from "@material-ui/core";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import { Router } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,6 +121,7 @@ export default function MovieFun() {
               </Grid>
             </Grid>
           </form>
+          {/* <Router> */}
 
           {movieList.map((row) => (
             <GridListTile
@@ -126,9 +129,9 @@ export default function MovieFun() {
               cols={row.featured ? 2 : 1}
               rows={row.featured ? 2 : 1}
             >
-              <a href="/moviedetail">
+              <Link to={"/moviedetail/" + row["name"]}>
                 <img src={row["poster"]} alt={row["name"]} />
-              </a>
+              </Link>
               <GridListTileBar
                 title={row["name"]}
                 titlePosition="top"
@@ -145,6 +148,7 @@ export default function MovieFun() {
               />
             </GridListTile>
           ))}
+          {/* </Router> */}
         </GridList>
       </div>
     );
