@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
 import {
   Grid,
   TextField,
   Button,
   makeStyles,
-  IconButton,
+ 
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -24,6 +25,7 @@ import {
 } from "@material-ui/core";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Router } from "react-router";
+import Navigation from "./Navigation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,9 +93,13 @@ export default function MovieFun() {
   } else {
     return (
       <div className={classes.root}>
-        <h1>
-          hi {localStorage.getItem("username")} 
-        </h1>
+        <Navigation/>
+        {localStorage.getItem("username")?
+           <h1>
+           hi {localStorage.getItem("username")} 
+         </h1>:""
+        }
+     
 
         <GridList cellHeight={300} spacing={1} className={classes.gridList}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit(search)}>
@@ -140,11 +146,11 @@ export default function MovieFun() {
                 title={row["name"]}
                 titlePosition="top"
                 actionIcon={
-                  <IconButton
+                  <IconButton 
                     aria-label={'star${row["name"]}'}
                     className={classes.icon}
                   >
-                    <StarBorderIcon color="primary" />
+                    <StarBorderIcon  color="primary" />
                   </IconButton>
                 }
                 actionPosition="left"

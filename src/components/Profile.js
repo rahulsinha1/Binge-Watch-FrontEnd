@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+// import EditableLabel from 'react-inline-edit';
 
 export default function Profile() {
   const initState = {
@@ -63,7 +64,7 @@ export default function Profile() {
       .then(() => localStorage.clear())
       .then(() => {
         localStorage.clear();
-        window.location.href = "/";
+        window.location.href = "/movie";
       });
     // .then({Redirect:true})
     // .then(Router.browserHistory.push("/movie"));
@@ -76,13 +77,15 @@ export default function Profile() {
   } else {
     return (
       <div>
-        <h1>profile</h1>
+        <h1> {localStorage.getItem("username")}'s profile</h1>
         <h1>{localStorage.getItem("username")}</h1>
         <button onClick={profile}>Log out</button>
         <a href={"/"}>home</a>
         <a>{localStorage.getItem("role")}</a>
         <a>{state.currentUser.username}</a>
         <br />
+
+
       </div>
     );
   }

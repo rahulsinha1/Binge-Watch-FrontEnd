@@ -9,6 +9,13 @@ export default function LoginPage() {
   const { handleSubmit, register, control } = useForm();
   const [redirect, setRedirect] = useState(false);
 
+  // useEffect(() => {
+  //   if(localStorage.getItem("id")!==null){
+  //     alert("hello");
+  //     window.location.href = "/";
+  //   }
+  // });
+
   function authorize(params) {
     const state = {
       username: params["username"],
@@ -24,7 +31,7 @@ export default function LoginPage() {
                 localStorage.setItem("id", response.data.id);
                 localStorage.setItem("role", response.data.role);
         setRedirect(true);
-        window.location.href = "/";
+        window.location.href = "/movie";
       });
     // fetch("http://localhost:8080/api/user/login", {
     //   method: "POST",
@@ -91,6 +98,7 @@ export default function LoginPage() {
                     label="Password"
                     fullwidth="true"
                     inputRef={register}
+                    type="password"
                   />
                 </Grid>
               </Grid>

@@ -8,7 +8,12 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Redirect,Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+  Link,
+} from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import ContainedButtons from "./button";
 import axios from "axios";
@@ -17,9 +22,9 @@ import Button from "@material-ui/core/Button";
 import LoginPage from "./components/login";
 import MovieFun from "./components/movie.js";
 import PostForm from "./components/PostForm";
-import AuthApi from "./components/AuthApi";
-import { HashRouter, Route} from 'react-router-dom';
-import ls from 'local-storage';
+// import AuthApi from "./components/AuthApi";
+import { HashRouter, Route } from "react-router-dom";
+import ls from "local-storage";
 import Navigation from "./components/Navigation";
 import SignUpPage from "./components/register";
 import MovieDetail from "./components/movieDetail";
@@ -36,10 +41,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+var IsLoggedIn = localStorage.getItem("username") ? true : false;
+
 function App() {
   const [auth, setAuth] = React.useState(false);
   const [userList, setUserList] = useState([]);
   const classes = useStyles();
+
+  var logout = () =>
+    fetch("http://localhost:8080/api/user/logout", {
+      method: "POST",
+      credentials: "include",
+    })
+      // .then(() => setState({ redirect: true }))
+      // .then(() => console.log(state.redirect))
+      .then(() => localStorage.clear())
+      .then(() => {
+        localStorage.clear();
+        window.location.href = "/#/movie";
+      });
 
   function getUserList() {
     axios
@@ -59,35 +79,44 @@ function App() {
 
   return (
 
-<div className="App">
-<HashRouter>
-  <ul>
-    <li><Link to='/movie'>Movie</Link></li>
-    <li><Link to='/signup'>signup</Link></li>
-    <li><Link to='/login'>login</Link></li>
-    <li><Link to='/userList'>User List</Link></li>
-    <li><Link to='/profile'>profile</Link></li>
-  </ul>
-  <Switch>
-  <Route path="/movie"component={MovieFun}/>
-  <Route path="/signup"component={SignUpPage}/>
-  <Route path="/login"component={LoginPage}/>
-  <Route path="/userList"component={UserList}/>
-  <Route path="/profile"component={Profile}/>
-  </Switch>
-</HashRouter>
 
-</div>
-  
+    <div>
+<MovieFun/>
 
-    
-// {/* <div>
-//   <Navigation/>
-//   <MovieFun/>
+  </div>
 
-
-// </div> */}
-
+    // <div className="App">
+    //   <HashRouter>
+    //     <ul>
+    //       {/* <button>
+    //         <Link to="/signup">signup</Link>
+    //       </button> */}
+    //       {IsLoggedIn ? (
+    //         <button onClick={logout}>Log out</button>
+    //       ) : (
+    //         <button>
+    //           <Link to="/login">login</Link>
+    //         </button>
+    //       )}
+    //       <button>
+    //         <Link to="/movie">Movie</Link>
+    //       </button>
+    //       <button>
+    //         <Link to="/userList">User List</Link>
+    //       </button>
+    //       <button>
+    //         <Link to="/profile">profile</Link>
+    //       </button>
+    //     </ul>
+    //     <Switch>
+    //       <Route path="/movie" component={MovieFun} />
+    //       {/* <Route path="/signup" component={SignUpPage} /> */}
+    //       <Route path="/login" component={LoginPage} />
+    //       <Route path="/userList" component={UserList} />
+    //       <Route path="/profile" component={Profile} />
+    //     </Switch>
+    //   </HashRouter>
+    // </div>
 
 
 
