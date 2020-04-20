@@ -17,11 +17,16 @@ import Button from "@material-ui/core/Button";
 import LoginPage from "./components/login";
 import MovieFun from "./components/movie.js";
 import PostForm from "./components/PostForm";
-import Cookies from "js-cookie";
 import AuthApi from "./components/AuthApi";
-import { Route } from "react-router-dom";
-
-const cookies = new Cookies();
+import { HashRouter, Route} from 'react-router-dom';
+import ls from 'local-storage';
+import Navigation from "./components/Navigation";
+import SignUpPage from "./components/register";
+import MovieDetail from "./components/movieDetail";
+import UserDetail from "./components/UserDetail";
+import Profile from "./components/Profile";
+import UserList from "./components/userList";
+// const cookies = new Cookies();
 // cookies.set('myCat', 'Pacman', { path: '/' });
 // console.log(cookies.get('myCat'));
 
@@ -53,48 +58,59 @@ function App() {
   }, []);
 
   return (
-    <div >
-      {/* <AuthApi.Provider value={(auth, setAuth)}>
-        <Router>
-          <Routes />
-        </Router>
-      </AuthApi.Provider> */}
 
-      <Grid container justify="center">
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          {/* <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>UserName</TableCell>
-                  <TableCell>Password</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {userList.map((row) => (
-                  <TableRow key={row["username"]}>
-                    <TableCell component="th" scope="row">
-                      {row["username"]}
-                    </TableCell>
-                    <TableCell>{row["pass"]}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer> */}
-          {/* <LoginPage /> */}
-          <Button href="/login" variant="contained">
-            login
-          </Button>
-          <Button href="/movie" variant="contained">
-            movie
-          </Button>
-          <Button href="/userList" variant="contained">
-            userList
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+<div className="App">
+<HashRouter>
+  <ul>
+    <li><Link to='/movie'>Movie</Link></li>
+    <li><Link to='/signup'>signup</Link></li>
+    <li><Link to='/login'>login</Link></li>
+    <li><Link to='/userList'>User List</Link></li>
+    <li><Link to='/profile'>profile</Link></li>
+  </ul>
+  <Switch>
+  <Route path="/movie"component={MovieFun}/>
+  <Route path="/signup"component={SignUpPage}/>
+  <Route path="/login"component={LoginPage}/>
+  <Route path="/userList"component={UserList}/>
+  <Route path="/profile"component={Profile}/>
+  </Switch>
+</HashRouter>
+
+</div>
+  
+
+    
+// {/* <div>
+//   <Navigation/>
+//   <MovieFun/>
+
+
+// </div> */}
+
+
+
+
+
+
+
+
+    // <div >
+    //   <Grid container justify="center">
+    //     <Grid item xs={12} sm={12} md={6} lg={6}>
+
+    //       <Button href="/login" variant="contained">
+    //         login
+    //       </Button>
+    //       <Button href="/movie" variant="contained">
+    //         movie
+    //       </Button>
+    //       <Button href="/userList" variant="contained">
+    //         userList
+    //       </Button>
+    //     </Grid>
+    //   </Grid>
+    // </div>
   );
 }
 

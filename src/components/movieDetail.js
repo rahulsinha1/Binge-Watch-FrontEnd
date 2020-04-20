@@ -12,6 +12,7 @@ import {
   TablemovieDetail,
   Paper,
 } from "@material-ui/core";
+import Navigation from "./Navigation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,17 +27,17 @@ export default function MovieFun(name) {
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
 
-  function getMovieList() {
-    axios
-      .get("http://localhost:8080/api/movies")
-      .then(function (response) {
-        console.log(response);
-        setMovieList([].concat(response["data"]));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  // function getMovieList() {
+  //   axios
+  //     .get("http://localhost:8080/api/movies")
+  //     .then(function (response) {
+  //       console.log(response);
+  //       setMovieList([].concat(response["data"]));
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
   function search(params) {
     axios
@@ -57,6 +58,7 @@ export default function MovieFun(name) {
 
   return (
     <div class="container-fluid app-container" className={classes.root}>
+      <Navigation/>
       <Grid container justify="center">
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <h3>

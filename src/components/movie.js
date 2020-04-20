@@ -91,6 +91,10 @@ export default function MovieFun() {
   } else {
     return (
       <div className={classes.root}>
+        <h1>
+          hi {localStorage.getItem("username")} 
+        </h1>
+
         <GridList cellHeight={300} spacing={1} className={classes.gridList}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit(search)}>
             <Grid container justify="center" style={{ paddingBottom: "1rem" }}>

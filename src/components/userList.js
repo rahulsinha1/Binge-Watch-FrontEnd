@@ -16,59 +16,82 @@ import Button from "@material-ui/core/Button";
 import LoginPage from "./login";
 import MovieFun from "./movie.js";
 import PostForm from "./PostForm";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import { Route, Link } from "react-router-dom";
+import Navigation from "./Navigation";
+
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-  }));
+  root: {
+    flexGrow: 1,
+  },
+}));
 
 export default function UserList() {
-    const [userList, setUserList] = useState([]);
-    const classes = useStyles();
+  const [userList, setUserList] = useState([]);
+  const classes = useStyles();
 
-    function getUserList() {
-        axios
-          .get("http://localhost:8080//api/users/select/all")
-          .then(function (response) {
-            console.log(response);
-            setUserList([].concat(response["data"]));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
-    
-      useEffect(() => {
-        getUserList();
-      }, []);
-      
-  return (
-    <div className={classes.root}>
-      <Grid container justify="center">
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>UserName</TableCell>
-                  <TableCell>Password</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {userList.map((row) => (
-                  <TableRow key={row["username"]}>
-                    <TableCell component="th" scope="row">
-                      {row["username"]}
-                    </TableCell>
-                    <TableCell>{row["pass"]}</TableCell>
+  function getUserList() {
+    axios
+      .get("http://localhost:8080//api/users/select/all")
+      .then(function (response) {
+        console.log(response);
+        setUserList([].concat(response["data"]));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function deleteUser(param){
+    axios.get("http://localhost8080/api/user/delete/"+param["username"])
+    // alert("helllo")
+  }
+
+  useEffect(() => {
+    getUserList();
+  }, []);
+  // if (localStorage.getItem("user") != null && localStorage.getItem("userrole")==="admin") {
+    return (
+      <div className={classes.root}>
+        <Grid container justify="center">
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <h1>{localStorage.getItem("user")}</h1>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>UserName</TableCell>
+                    <TableCell>Password</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                
+                <TableBody>
+                  {userList.map((row) => (
+                    <TableRow key={row["username"]}>
+                      <TableCell component="th" scope="row">
+                      <Link to={"/userdetail/" + row["username"]}>
+                      {row["username"]}
+              </Link>
+                        
+                      </TableCell>
+                      <TableCell>{row["pass"]}</TableCell>
+                      <button 
+                      // onClick={deleteUser(row)}
+                      >delete</button>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
-}
+      </div>
+    );
+  }
+//   else{
+//     return(
+// <h1>you do not have access</h1>
+//       )
+  // }
+// }
+

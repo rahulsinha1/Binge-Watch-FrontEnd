@@ -8,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -19,40 +18,61 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function SignUpPage() {
   const { handleSubmit, register, control } = useForm();
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
   const [role, setRole] = React.useState("");
 
+  // state = {
+  //   user: {
+  //     username: '',
+  //     pass: '',
+  //     email:'',
+  //     role:'',
+  //   //   verifyPassword: "",
+  //   },
+  // };
+
+
   const handleChange = (event) => {
     setRole(event.target.value);
   };
 
   function singup(params) {
-    console.log(params);
+
     const newUser = {
-      email:params["email"],
+      email: params["email"],
       username: params["user"],
       pass: params["pass"],
       role: params["role"].toUpperCase(),
     };
-    axios
-      .post("http://localhost:8080/api/user/create", newUser)
-      .then(function (response) {
-        console.log(response);
-        setRedirect(true);
-      })
+    fetch("http://localhost:8080/api/user/create", {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "content-type": "application/json",
+      },
+      credentials:"include"
+    })
+      .then((response) => response.json())
+      .then (setRedirect(true))
       .catch(function (error) {
         console.log(error);
       });
+    }
+
+          // console.log(params);
+    // const newUser = {
+    //   email: params["email"],
+    //   username: params["user"],
+    //   pass: params["pass"],
+    //   role: params["role"].toUpperCase(),
+    // };
     // axios
-    //   .get(
-    //     "http://localhost:8080/api/user/insert/" +
-    //       params["user"] +
-    //       "/" +
-    //       params["pass"]
-    //   )
+    //   .post("http://localhost:8080/api/user/create", newUser)
     //   .then(function (response) {
     //     console.log(response);
     //     setRedirect(true);
@@ -60,10 +80,9 @@ export default function SignUpPage() {
     //   .catch(function (error) {
     //     console.log(error);
     //   });
-  }
 
   if (redirect) {
-    return <Redirect to="/" />;
+    return <Redirect to="/profile" />;
   } else {
     return (
       <div>
@@ -71,7 +90,7 @@ export default function SignUpPage() {
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <FormControl required className={classes.formControl}>
               <InputLabel id="demo-simple-select-required-label">
-                Role
+                Select role
               </InputLabel>
               <Controller
                 as={
@@ -124,6 +143,7 @@ export default function SignUpPage() {
                     label="Password"
                     fullwidth="true"
                     inputRef={register}
+                    type="password"
                   />
                 </Grid>
               </Grid>
@@ -139,7 +159,7 @@ export default function SignUpPage() {
                   fullwidth="true"
                 >
                   <Button variant="contained" color="primary" type="submit">
-                    Sign Up
+                    Register
                   </Button>
                 </Grid>
               </Grid>
