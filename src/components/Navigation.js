@@ -42,9 +42,20 @@ function Navigation() {
     <Grid container justify="center">
       <Grid item xs={12} sm={12} md={6} lg={6}>
         {localStorage.getItem("username") ? (
-          <Button onClick={logout} href="/movie" variant="contained">
-            logout
-          </Button>
+          <Grid>
+            <Button onClick={logout} href="/movie" variant="contained">
+              logout
+            </Button>
+            <Button
+              href={"/watchlist/" + localStorage.getItem("username")}
+              variant="contained"
+            >
+              Watch List
+            </Button>
+            <Button href="/profile" variant="contained">
+              profile
+            </Button>
+          </Grid>
         ) : (
           <Button href="/login" variant="contained">
             login
@@ -67,10 +78,6 @@ function Navigation() {
         ) : (
           ""
         )}
-        
-        <Button href="/profile" variant="contained">
-          profile
-        </Button>
       </Grid>
     </Grid>
   );

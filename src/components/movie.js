@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link } from "react-router-dom";
-import IconButton from '@material-ui/core/IconButton';
-import {
-  Grid,
-  TextField,
-  Button,
-  makeStyles,
- 
-} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import { Grid, TextField, Button, makeStyles } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -60,8 +54,9 @@ export default function MovieFun() {
     axios
       .get("http://localhost:8080/api/movies")
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setMovieList([].concat(response["data"]));
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -74,7 +69,7 @@ export default function MovieFun() {
         params: { name: params["name"] },
       })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response["data"] !== {}) {
           setMovieList([response["data"], ...movieList]);
         }
@@ -86,6 +81,7 @@ export default function MovieFun() {
 
   useEffect(() => {
     getMovieList();
+
   }, []);
 
   if (redirect) {
@@ -93,13 +89,12 @@ export default function MovieFun() {
   } else {
     return (
       <div className={classes.root}>
-        <Navigation/>
-        {localStorage.getItem("username")?
-           <h1>
-           hi {localStorage.getItem("username")} 
-         </h1>:""
-        }
-     
+        <Navigation />
+        {localStorage.getItem("username") ? (
+          <h1>hi {localStorage.getItem("username")}</h1>
+        ) : (
+          ""
+        )}
 
         <GridList cellHeight={300} spacing={1} className={classes.gridList}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit(search)}>
@@ -146,11 +141,11 @@ export default function MovieFun() {
                 title={row["name"]}
                 titlePosition="top"
                 actionIcon={
-                  <IconButton 
+                  <IconButton
                     aria-label={'star${row["name"]}'}
                     className={classes.icon}
                   >
-                    <StarBorderIcon  color="primary" />
+                    <StarBorderIcon color="primary" />
                   </IconButton>
                 }
                 actionPosition="left"

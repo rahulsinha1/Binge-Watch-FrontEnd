@@ -13,6 +13,7 @@ import UserList from "./components/userList";
 import Profile from "./components/Profile";
 import UserDetail from "./components/UserDetail";
 import Navigation from "./components/Navigation";
+import WatchList from "./components/watchList";
 
 ReactDOM.render(
   
@@ -50,6 +51,11 @@ ReactDOM.render(
         <Route path="/navigation">
           <Navigation />
         </Route>
+        <Route exact path="/watchlist/:username" 
+        component={() => <WatchList username={localStorage.getItem("username")} />}
+        >
+        </Route>
+
       </Switch>
     </Router>
   </React.StrictMode>,

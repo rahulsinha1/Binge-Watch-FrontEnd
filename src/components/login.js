@@ -21,16 +21,20 @@ export default function LoginPage() {
       username: params["username"],
       pass: params["pass"],
     };
+    // console.log(state);
     const login_status = false;
     axios
       .post("http://localhost:8080/api/user/login", state)
       .then(function (response) {
         console.log(response);
                 localStorage.setItem("username", response.data.username);
-                localStorage.setItem("pass", response.data.pass);
+                localStorage.setItem("email", response.data.email);
                 localStorage.setItem("id", response.data.id);
                 localStorage.setItem("role", response.data.role);
-        setRedirect(true);
+                localStorage.setItem("first_name", response.data.firstName);
+                localStorage.setItem("last_name", response.data.lastName);
+
+        // setRedirect(true);
         window.location.href = "/movie";
       });
     // fetch("http://localhost:8080/api/user/login", {

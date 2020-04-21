@@ -57,6 +57,8 @@ export default function SignUpPage() {
       },
       credentials:"include"
     })
+    .then(()=>alert("You've successful registered! Please log in now"))
+    
       .then((response) => response.json())
       .then (setRedirect(true))
       .catch(function (error) {
@@ -82,7 +84,7 @@ export default function SignUpPage() {
     //   });
 
   if (redirect) {
-    return <Redirect to="/profile" />;
+    return <Redirect to="/" />;
   } else {
     return (
       <div>

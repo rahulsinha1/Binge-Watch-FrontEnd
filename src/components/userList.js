@@ -43,16 +43,18 @@ export default function UserList() {
   }
 
   function deleteUser(param){
-    axios.get("http://localhost8080/api/user/delete/"+param["username"])
-    // alert("helllo")
+    axios.get("http://localhost8080/api/user/delete/"+param)
+    // alert("user deleated")
   }
 
   useEffect(() => {
     getUserList();
   }, []);
-  // if (localStorage.getItem("user") != null && localStorage.getItem("userrole")==="admin") {
+
+  if (localStorage.getItem("user") != null && localStorage.getItem("role")==="ADMIN") {
     return (
       <div className={classes.root}>
+        <Navigation/>
         <Grid container justify="center">
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <h1>{localStorage.getItem("user")}</h1>
@@ -62,6 +64,8 @@ export default function UserList() {
                   <TableRow>
                     <TableCell>UserName</TableCell>
                     <TableCell>Password</TableCell>
+                    <TableCell>Role</TableCell>
+                    <TableCell>Delete User</TableCell>
                   </TableRow>
                 </TableHead>
                 
@@ -75,9 +79,19 @@ export default function UserList() {
                         
                       </TableCell>
                       <TableCell>{row["pass"]}</TableCell>
+                      <TableCell>
+                        {row["role"]}
+                      </TableCell>
+                      <TableCell>
                       <button 
-                      // onClick={deleteUser(row)}
+                      onClick={
+                        function(){
+                          deleteUser(row["username"])
+                        }
+                        }
                       >delete</button>
+                      </TableCell>
+
                     </TableRow>
                   ))}
                 </TableBody>
@@ -94,4 +108,4 @@ export default function UserList() {
 //       )
   // }
 // }
-
+}

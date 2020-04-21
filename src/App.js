@@ -80,7 +80,7 @@ function App() {
   return (
 
 
-    <div>
+    <div className="cintainer">
 <MovieFun/>
 
   </div>
