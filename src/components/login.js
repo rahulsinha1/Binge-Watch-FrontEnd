@@ -105,8 +105,8 @@ export default function LoginPage() {
                 justify="center"
                 style={{ paddingBottom: "1rem" }}
               >
-                <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <TextField
+                <Grid  item xs={12} sm={12} md={12} lg={12}>
+                  <TextField required
                     name="username"
                     id="standard-basic1"
                     label="User Name"
@@ -115,7 +115,7 @@ export default function LoginPage() {
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <TextField
+                  <TextField required
                     name="pass"
                     id="standard-basic"
                     label="Password"

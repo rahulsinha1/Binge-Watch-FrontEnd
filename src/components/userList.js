@@ -51,7 +51,7 @@ export default function UserList() {
     getUserList();
   }, []);
 
-  // if (localStorage.getItem("username") != null && localStorage.getItem("role")==="ADMIN") {
+  if (localStorage.getItem("username") != null && localStorage.getItem("role")==="ADMIN") {
     return (
       <div className={classes.root}>
         <Navigation/>
@@ -104,10 +104,10 @@ export default function UserList() {
       </div>
     );
   }
-//   else{
-//     return(
-// <h1>you do not have access</h1>
-//       )
-//   }
-// }
+  else{
+    return(
+<h1>you do not have access</h1>
+      )
+  }
+}
 
