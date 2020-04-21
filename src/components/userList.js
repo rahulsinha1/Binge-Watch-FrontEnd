@@ -51,7 +51,7 @@ export default function UserList() {
     getUserList();
   }, []);
 
-  if (localStorage.getItem("user") != null && localStorage.getItem("role")==="ADMIN") {
+  // if (localStorage.getItem("username") != null && localStorage.getItem("role")==="ADMIN") {
     return (
       <div className={classes.root}>
         <Navigation/>
@@ -71,6 +71,8 @@ export default function UserList() {
                 
                 <TableBody>
                   {userList.map((row) => (
+
+
                     <TableRow key={row["username"]}>
                       <TableCell component="th" scope="row">
                       <Link to={"/userdetail/" + row["username"]}>
@@ -106,6 +108,6 @@ export default function UserList() {
 //     return(
 // <h1>you do not have access</h1>
 //       )
-  // }
+//   }
 // }
-}
+

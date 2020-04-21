@@ -75,7 +75,8 @@ export default function WatchList() {
       )
       .then(function(result){
         console.log(result);
-        setRedirect(true);
+        // setRedirect(true);
+        window.location.href = ("/watchlist/" + localStorage.getItem("username"));
       })
 
       .catch(function (error) {

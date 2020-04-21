@@ -4,6 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import ls from "local-storage";
 import { useForm, Controller } from "react-hook-form";
+import Navigation from "./Navigation";
 
 export default function LoginPage() {
   const { handleSubmit, register, control } = useForm();
@@ -23,20 +24,37 @@ export default function LoginPage() {
     };
     // console.log(state);
     const login_status = false;
-    axios
+    try {
+      axios
       .post("http://localhost:8080/api/user/login", state)
       .then(function (response) {
         console.log(response);
-                localStorage.setItem("username", response.data.username);
-                localStorage.setItem("email", response.data.email);
-                localStorage.setItem("id", response.data.id);
-                localStorage.setItem("role", response.data.role);
-                localStorage.setItem("first_name", response.data.firstName);
-                localStorage.setItem("last_name", response.data.lastName);
+        if(response.data===""){
+          alert("no user exist or password not correct, please retry or sign up");
+          window.location.href = "/login";
+        }
+        else{
+          localStorage.setItem("username", response.data.username);
+          localStorage.setItem("email", response.data.email);
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("role", response.data.role);
+          localStorage.setItem("first_name", response.data.firstName);
+          localStorage.setItem("last_name", response.data.lastName);
 
-        // setRedirect(true);
-        window.location.href = "/movie";
-      });
+  // setRedirect(true);
+  window.location.href = "/movie";
+
+        }
+                
+      })
+    } catch (error) {
+      console.log(error);
+    }
+    
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+      ;
     // fetch("http://localhost:8080/api/user/login", {
     //   method: "POST",
     //   body: JSON.stringify(state),
@@ -74,6 +92,7 @@ export default function LoginPage() {
   // } else {
     return (
       <div>
+        <Navigation/>
         <Grid container justify="center">
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <form

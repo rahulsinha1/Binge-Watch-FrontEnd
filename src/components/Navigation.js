@@ -24,7 +24,7 @@ function Navigation() {
   //   isLoggedIn = true;
   // }
   var role = localStorage.getItem("role");
-  var logout = () =>
+   function logout () {
     fetch("http://localhost:8080/api/user/logout", {
       method: "POST",
       credentials: "include",
@@ -37,13 +37,20 @@ function Navigation() {
         // alert("you've logged out, redirect to movie list")
         window.location.href = "/movie";
       });
+    }
 
   return (
     <Grid container justify="center">
       <Grid item xs={12} sm={12} md={6} lg={6}>
         {localStorage.getItem("username") ? (
           <Grid>
-            <Button onClick={logout} href="/movie" variant="contained">
+            <Button
+              onClick={function () {
+                logout()
+              }}
+              href="/movie"
+              variant="contained"
+            >
               logout
             </Button>
             <Button

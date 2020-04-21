@@ -54,9 +54,28 @@ export default function MovieFun() {
     axios
       .get("http://localhost:8080/api/movies")
       .then(function (response) {
-        // console.log(response);
+        console.log(response);
+        console.log(response["data"]);
         setMovieList([].concat(response["data"]));
-        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  function addWatchList(params) {
+    axios
+      .get(
+        "http://localhost:8080/api/user/add/watchlist/" +
+          localStorage.getItem("username") +
+          "/" +
+          params
+      )
+      .then(function (response) {
+        // console.log(response);
+        // window.location.href = {"/watchlist/" + localStorage.getItem("username")};
+        // setRedirect(true);
+        alert("added to watchlist");
+        window.location.href = "/movie";
       })
       .catch(function (error) {
         console.log(error);
@@ -81,7 +100,6 @@ export default function MovieFun() {
 
   useEffect(() => {
     getMovieList();
-
   }, []);
 
   if (redirect) {
@@ -137,20 +155,42 @@ export default function MovieFun() {
               <Link to={"/moviedetail/" + row["name"]}>
                 <img src={row["poster"]} alt={row["name"]} />
               </Link>
+{localStorage.getItem("username")?(
+
+<GridListTileBar
+title={row["name"]}
+titlePosition="top"
+actionIcon={
+  <IconButton
+    onClick={function () {
+      addWatchList(row["name"]);
+    }}
+    aria-label={'star${row["name"]}'}
+    className={classes.icon}
+  >
+    <StarBorderIcon color="primary" />
+  </IconButton>
+}
+actionPosition="left"
+// sName={classes.GridListTileBar}
+/>
+):(  <GridListTileBar
+  title={row["name"]}
+  titlePosition="top"
+  actionPosition="left"
+  // sName={classes.GridListTileBar}
+/>)}
+{/* 
               <GridListTileBar
                 title={row["name"]}
                 titlePosition="top"
-                actionIcon={
-                  <IconButton
-                    aria-label={'star${row["name"]}'}
-                    className={classes.icon}
-                  >
-                    <StarBorderIcon color="primary" />
-                  </IconButton>
-                }
                 actionPosition="left"
-                className={classes.GridListTileBar}
-              />
+                clas
+                sName={classes.GridListTileBar}
+              /> */}
+
+
+
             </GridListTile>
           ))}
           {/* </Router> */}
