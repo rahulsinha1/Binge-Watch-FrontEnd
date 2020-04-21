@@ -26,28 +26,50 @@ export default function UserDetail(name) {
   const { handleSubmit, register } = useForm();
   const [movieList, setMovieList] = useState([]);
   const [userDetail, setUserDetail] = useState({});
+  const [followerList, setFollowerList] = useState([]);
+  const [followingList, setFollowingList] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
-  const [watchList,setWatchList]=useState([])
+  const [watchList, setWatchList] = useState([]);
 
   function search(params) {
     axios
       .get("http://localhost:8080/api/user/find/username/" + params["name"])
       .then(function (response) {
-        console.log(response);
-        console.log(response.data.watchList);
+        // console.log(response);
+        // console.log(response.data.watchList);
         setUserDetail(response.data);
         setWatchList([].concat(response.data.watchList));
-        console.log(watchList);
+        // console.log(watchList);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
+  function getFollowers() {
+    axios
+      .get("http://localhost:8080/api/user/get/followers/" + name["name"])
+      .then(function (response) {
+        console.log(response.data);
+        setFollowerList([].concat(response.data));
+      });
+  }
+
+  function getFollowering() {
+    axios
+      .get("http://localhost:8080/api/user/get/following/" + name["name"])
+      .then(function (response) {
+        console.log(response.data);
+        setFollowingList([].concat(response.data));
+      });
+  }
+
   useEffect(() => {
     console.log(name);
     search(name);
+    getFollowers();
+    getFollowering();
   }, []);
 
   return (
@@ -66,34 +88,71 @@ export default function UserDetail(name) {
       <text>last Name: {userDetail.lastName}</text>
       <br></br>
       <br></br>
-      <text> {userDetail.username}'s WatchList: </text>
+      <h4> {userDetail.username}'s WatchList: </h4>
       <br />
       <Table>
-      <TableHead>
-                  <TableRow>
-                    <TableCell>Movie Name</TableCell>
-                    <TableCell>Imdb Rating</TableCell>
-                    <TableCell>Genre</TableCell>
-                    <TableCell>Year</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-        {watchList.map((row) => (
-          <TableRow key={row["name"]}>
-            <TableCell component="th" scope="row">
-              <Link to={"/movieDetail/" + row["name"]}>{row["name"]}</Link>
-            </TableCell>
-            <TableCell>{row["imdbRating"]}</TableCell>
-            <TableCell>{row["genre"]}</TableCell>
-            <TableCell>{row["year"]}</TableCell>
+        <TableHead>
+          <TableRow>
+            <TableCell>Movie Name</TableCell>
+            <TableCell>Imdb Rating</TableCell>
+            <TableCell>Genre</TableCell>
+            <TableCell>Year</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-
-
+        </TableHead>
+        <TableBody>
+          {watchList.map((row) => (
+            <TableRow key={row["name"]}>
+              <TableCell component="th" scope="row">
+                <Link to={"/movieDetail/" + row["name"]}>{row["name"]}</Link>
+              </TableCell>
+              <TableCell>{row["imdbRating"]}</TableCell>
+              <TableCell>{row["genre"]}</TableCell>
+              <TableCell>{row["year"]}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <br />
+      <h4> {userDetail.username}'s Follower: </h4>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>User Name</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {followerList.map((row) => (
+            <TableRow key={row["username"]}>
+              <TableCell component="th" scope="row">
+                <Link to={"/userDetail/" + row["username"]}>
+                  {row["username"]}
+                </Link>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
 
-
+      <br />
+      <h4> {userDetail.username}'s Following: </h4>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>User Name</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {followingList.map((row) => (
+            <TableRow key={row["username"]}>
+              <TableCell component="th" scope="row">
+                <Link to={"/userDetail/" + row["username"]}>
+                  {row["username"]}
+                </Link>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

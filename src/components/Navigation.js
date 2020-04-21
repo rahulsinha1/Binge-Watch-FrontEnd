@@ -62,6 +62,10 @@ function Navigation() {
             <Button href="/profile" variant="contained">
               profile
             </Button>
+            <Button href={"/userInteraction/" + localStorage.getItem("username")}
+            variant="contained">
+              Friend Zone
+            </Button>
           </Grid>
         ) : (
           <Button href="/login" variant="contained">

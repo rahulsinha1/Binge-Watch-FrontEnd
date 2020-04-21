@@ -155,32 +155,33 @@ export default function MovieFun() {
               <Link to={"/moviedetail/" + row["name"]}>
                 <img src={row["poster"]} alt={row["name"]} />
               </Link>
-{localStorage.getItem("username")?(
-
-<GridListTileBar
-title={row["name"]}
-titlePosition="top"
-actionIcon={
-  <IconButton
-    onClick={function () {
-      addWatchList(row["name"]);
-    }}
-    aria-label={'star${row["name"]}'}
-    className={classes.icon}
-  >
-    <StarBorderIcon color="primary" />
-  </IconButton>
-}
-actionPosition="left"
-// sName={classes.GridListTileBar}
-/>
-):(  <GridListTileBar
-  title={row["name"]}
-  titlePosition="top"
-  actionPosition="left"
-  // sName={classes.GridListTileBar}
-/>)}
-{/* 
+              {localStorage.getItem("username") ? (
+                <GridListTileBar
+                  title={row["name"]}
+                  titlePosition="top"
+                  actionIcon={
+                    <IconButton
+                      onClick={function () {
+                        addWatchList(row["name"]);
+                      }}
+                      aria-label={'star${row["name"]}'}
+                      className={classes.icon}
+                    >
+                      <StarBorderIcon color="secondary" />
+                    </IconButton>
+                  }
+                  actionPosition="left"
+                  // sName={classes.GridListTileBar}
+                />
+              ) : (
+                <GridListTileBar
+                  title={row["name"]}
+                  titlePosition="top"
+                  actionPosition="left"
+                  // sName={classes.GridListTileBar}
+                />
+              )}
+              {/* 
               <GridListTileBar
                 title={row["name"]}
                 titlePosition="top"
@@ -188,9 +189,6 @@ actionPosition="left"
                 clas
                 sName={classes.GridListTileBar}
               /> */}
-
-
-
             </GridListTile>
           ))}
           {/* </Router> */}

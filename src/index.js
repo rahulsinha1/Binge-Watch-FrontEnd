@@ -14,6 +14,7 @@ import Profile from "./components/Profile";
 import UserDetail from "./components/UserDetail";
 import Navigation from "./components/Navigation";
 import WatchList from "./components/watchList";
+import UserInteraction from "./components/UserInteraction";
 
 ReactDOM.render(
   
@@ -36,8 +37,9 @@ ReactDOM.render(
         ></Route>
         <Route
           exact
+          
           path="/userdetail/:name"
-          component={(props) => <UserDetail name={props.match.params.name} />}
+          component={(props) => <UserDetail name={props.match.params.name} key={Math.random()}/>}
         ></Route>
         <Route path="/login">
           <LoginPage />
@@ -53,6 +55,10 @@ ReactDOM.render(
         </Route>
         <Route exact path="/watchlist/:username" 
         component={() => <WatchList username={localStorage.getItem("username")} />}
+        >
+        </Route>
+        <Route exact path="/userInteraction/:username" 
+        component={() => <UserInteraction username={localStorage.getItem("username")} />}
         >
         </Route>
 
