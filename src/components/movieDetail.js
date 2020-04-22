@@ -30,6 +30,7 @@ export default function MovieFun(name) {
   const [redirect, setRedirect] = useState(false);
   const [listUser, setListUser] = useState([]);
   const [listStreamer, setListStreamer] = useState([]);
+  const [listReview,setListREview]=useState([]);
   const classes = useStyles();
 
   // function getMovieList() {
@@ -53,9 +54,8 @@ export default function MovieFun(name) {
           name["name"]
       )
       .then(function (response) {
-
         alert("added to watchlist");
-        window.location.href = "/movieDetail/"+name["name"];
+        window.location.href = "/movieDetail/" + name["name"];
       })
       .catch(function (error) {
         console.log(error);
@@ -111,9 +111,49 @@ export default function MovieFun(name) {
       });
   }
 
-  function review(){
-    // axios
-    // .post("http://localhost:8080//api/critic/addmovieReview/")
+  function deleteStreamer(params) {
+    axios
+      .get("http://localhost:8080//api/streamers/delete/" + params)
+      .then(function (response) {
+        // console.log(response.data);
+        window.location.href = "/movieDetail/" + name["name"];
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function review(feedback) {
+    const result = {
+      comment: "never saw it",
+      grade: 9,
+    };
+    axios
+      .post(
+        "http://localhost:8080/api/user/addmovieReview/" +
+          localStorage.getItem("username") +
+          "/" +
+          name["name"],
+        {},
+        {
+          params: {
+            comment: feedback["comment"],
+            grade: feedback["grade"],
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+      });
+  }
+
+  function showReview(name){
+      axios
+      .get("http://localhost:8080/api/movieReview/find/"+ name["name"])
+      .then(function(response){
+        console.log(response);
+        setListREview([].concat(response.data));
+      })
   }
 
   useEffect(() => {
@@ -121,6 +161,7 @@ export default function MovieFun(name) {
     search(name);
     getListUser();
     getStreamer();
+    showReview(name);
   }, []);
 
   return (
@@ -134,9 +175,13 @@ export default function MovieFun(name) {
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <h3>
             <text key={movieDetail["name"]}>
-            <Button variant="contained" color="primary" onClick={function(){
-                addWatchList(name);
-              }    }>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={function () {
+                  addWatchList(name);
+                }}
+              >
                 Add to watchlist
               </Button>
               <h1>{movieDetail["name"]}</h1>
@@ -178,28 +223,74 @@ export default function MovieFun(name) {
           </h3>
         </Grid>
       </Grid>
-      <form
-              noValidate
-              autoComplete="off"
-              onSubmit={handleSubmit(review)}
-            >
-      <TextField required
-                    name="grade"
-                    id="standard-basic1"
-                    label="Grading"
-                    fullwidth="true"
-                    inputRef={register}
-                  />
+      {localStorage.getItem("role") === "CRITIC" ? (
+        <form noValidate autoComplete="off" onSubmit={handleSubmit(review)}>
+          <TextField
+            required
+            name="grade"
+            id="standard-basic1"
+            label="Grading"
+            fullwidth="true"
+            inputRef={register}
+          />
 
-      <TextField required
-                    name="comment"
-                    id="standard-basic1"
-                    label="Write Review"
-                    fullwidth="true"
-                    inputRef={register}
-                  />
-                 </form> 
-        
+          <TextField
+            required
+            name="comment"
+            id="standard-basic1"
+            label="Write Review"
+            fullwidth="true"
+            inputRef={register}
+          />
+          <Button
+            // onClick={function () {
+            //   review();
+            // }}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            submit
+          </Button>
+        </form>
+      ) : (
+        ""
+      )}
+
+<Table>
+        <TableHead>
+          <TableRow>
+          <TableCell>Critic</TableCell>
+            <TableCell>Review</TableCell>
+            <TableCell>Score</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {listReview.map((row) => (
+            <TableRow key={row["id"]}>
+              <TableCell component="th" scope="row">
+                <Link to={"/userDetail/" + row["userName"]}>
+                  {row["userName"]}
+                </Link>{" "}
+                {/* <Button
+                  onClick={function () {
+                    followUser(row["username"]);
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Follow{" "}
+                </Button> */}
+              </TableCell>
+              <TableCell>
+                {row["comment"]} </TableCell>
+                <TableCell>
+                {row["grade"]} </TableCell>
+                
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
 
       <Table>
         <TableHead>
@@ -242,12 +333,26 @@ export default function MovieFun(name) {
           {listStreamer.map((row) => (
             <TableRow key={row["streamingPlatform"]}>
               <TableCell component="th" scope="row">
-                <a target="_blank" href={row["streamingUrl"]}
-                 
-                >
+                <a target="_blank" href={row["streamingUrl"]}>
                   <img src={row["logoUrl"]} alt={row["logoUrl"]} />
                 </a>
               </TableCell>
+              {localStorage.getItem("role") === "ADMIN" ? (
+                <TableCell>
+                  <Button
+                    onClick={function () {
+                      deleteStreamer(row["id"]);
+                    }}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              ) : (
+                ""
+              )}
             </TableRow>
           ))}
         </TableBody>

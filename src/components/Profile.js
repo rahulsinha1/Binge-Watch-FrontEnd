@@ -360,6 +360,8 @@ export default function Profile() {
             Update info
           </Button>
         </form>
+          <h3>Add phone number:</h3>
+
         {localStorage.getItem("street") ? (
           <Grid>
             <h3>Your Address</h3>
@@ -452,6 +454,7 @@ export default function Profile() {
             </Grid>
           </form>
         )}
+          <h3>Add phone number:</h3>
 
         <form noValidate autoComplete="off" onSubmit={handleSubmit(addPhone)}>
           <Grid container justify="center" style={{ paddingBottom: "1rem" }}>

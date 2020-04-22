@@ -31,6 +31,7 @@ export default function UserDetail(name) {
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
   const [watchList, setWatchList] = useState([]);
+  const [listReview, setListReview] = useState([]);
 
   function search(params) {
     axios
@@ -96,11 +97,22 @@ export default function UserDetail(name) {
     })
 }
 
+function getCritic(){
+
+  axios
+  .get("http://localhost:8080/api/movieReview/find/user/"+ name["name"])
+  .then(function(response){
+    console.log(response);
+    setListReview([].concat(response.data));
+  })
+}
+
   useEffect(() => {
     console.log(name);
     search(name);
     getFollowers();
     getFollowering();
+    getCritic();
   }, []);
 
   return (
@@ -119,6 +131,31 @@ export default function UserDetail(name) {
       <text>last Name: {userDetail.lastName}</text>
       <br></br>
       <br></br>
+
+      <h4> {userDetail.username}'s Critic List: </h4>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Movie Name</TableCell>
+            <TableCell>Review</TableCell>
+            <TableCell>Score</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {listReview.map((row) => (
+            <TableRow key={row["id"]}>
+              <TableCell component="th" scope="row">
+                <Link to={"/movieDetail/" + row["movieName"]}>{row["movieName"]}</Link>
+              </TableCell>
+              <TableCell>{row["comment"]}</TableCell>
+              <TableCell>{row["grade"]}</TableCell>
+            
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+
       <h4> {userDetail.username}'s WatchList: </h4>
       <br />
       <Table>

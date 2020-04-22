@@ -153,12 +153,13 @@ export default function MovieFun() {
               // rows={row.featured ? 2 : 1}
             >
               <Link to={"/moviedetail/" + row["name"]}>
-                <img src={row["poster"]} alt={row["name"]} />
+                <img src={row["poster"]} alt={row["name"] } />
               </Link>
               {localStorage.getItem("username") ? (
                 <GridListTileBar
                   title={row["name"]}
                   titlePosition="top"
+                  
                   actionIcon={
                     <IconButton
                       onClick={function () {
@@ -169,7 +170,9 @@ export default function MovieFun() {
                     >
                       <StarBorderIcon color="secondary" />
                     </IconButton>
+
                   }
+                   
                   actionPosition="left"
                   // sName={classes.GridListTileBar}
                 />
