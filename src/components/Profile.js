@@ -360,7 +360,7 @@ export default function Profile() {
             Update info
           </Button>
         </form>
-          <h3>Add phone number:</h3>
+          <h3>Add address:</h3>
 
         {localStorage.getItem("street") ? (
           <Grid>

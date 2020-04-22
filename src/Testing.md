@@ -17,7 +17,7 @@
 
 9. admin login, can see userlist, click in userlist to see all users
 
-10.admin login, can see userlist, click in userlist, can change user role or delete user from the page, or click into userDetail by click on the name, to get into user detail and further delete this user's watchlist, or unfollow his/her following
+10. admin login, can see userlist, click in userlist, can change user role or delete user from the page, or click into userDetail by click on the name, to get into user detail and further delete this user's watchlist, or unfollow his/her following
 
 
 11. admin login, can see userlist, click in userlist, can delete users (won't allow you to delete some user, won't tell you reason :) you can delete new user) 

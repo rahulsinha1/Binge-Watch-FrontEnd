@@ -58,6 +58,7 @@ export default function MovieFun(name) {
         window.location.href = "/movieDetail/" + name["name"];
       })
       .catch(function (error) {
+        alert("You already added this movie");
         console.log(error);
       });
   }
@@ -300,7 +301,7 @@ export default function MovieFun(name) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Liked by other user:</TableCell>
+            <TableCell>other users who add this movie to watchlist:</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

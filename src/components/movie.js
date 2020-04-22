@@ -20,7 +20,9 @@ import {
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Router } from "react-router";
 import Navigation from "./Navigation";
-import background from "../background.jpg"
+import background from "../background.jpg";
+import binge from "../binge.jpg";
+import logo from "../logo.png";
 
 const imageResult={
   // position: absolute,
@@ -89,6 +91,7 @@ export default function MovieFun() {
         window.location.href = "/movie";
       })
       .catch(function (error) {
+        alert("You already added this movie");
         console.log(error);
       });
   }
@@ -106,6 +109,7 @@ export default function MovieFun() {
       })
       .catch(function (error) {
         console.log(error);
+        alert("could not find it : ( try a different name?")
       });
   }
 
@@ -120,7 +124,11 @@ export default function MovieFun() {
     return (
       <div className={classes.root}>
         <Navigation />
-
+<img src={logo} style={{  
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat'
+}}/>
         {localStorage.getItem("username") ? (
           <h1>hi {localStorage.getItem("username")}</h1>
         ) : (

@@ -68,7 +68,7 @@ export default function UserInteraction() {
   return (
     <div>
       <Navigation />
-      <h3>hi{localStorage.getItem("username")}</h3>
+      <h3>hi {localStorage.getItem("username")}</h3>
 
       <h4> Your Follower: </h4>
       <Table>

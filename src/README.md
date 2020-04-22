@@ -6,6 +6,8 @@ I didn't got time to clean up the code and sorry about the messy.
 
 Required testing is in src as well.
 
+All current user's username and password are the same.
+
 Feel free to reachout if you have any questions!
 
 my contact:
