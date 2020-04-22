@@ -20,6 +20,17 @@ import {
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Router } from "react-router";
 import Navigation from "./Navigation";
+import background from "../background.jpg"
+
+const imageResult={
+  // position: absolute,
+  //   opacity: 0.3
+  backgroundImage: `url(${background})`,
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat'
+
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,16 +116,18 @@ export default function MovieFun() {
   if (redirect) {
     return <Redirect to="/movie" />;
   } else {
+    
     return (
       <div className={classes.root}>
         <Navigation />
+
         {localStorage.getItem("username") ? (
           <h1>hi {localStorage.getItem("username")}</h1>
         ) : (
           ""
         )}
 
-        <GridList cellHeight={300} spacing={1} className={classes.gridList}>
+        <GridList  cellHeight={300} spacing={1} className={classes.gridList}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit(search)}>
             <Grid container justify="center" style={{ paddingBottom: "1rem" }}>
               <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -147,7 +160,7 @@ export default function MovieFun() {
           {/* <Router> */}
 
           {movieList.map((row) => (
-            <GridListTile
+            <GridListTile 
               key={row["poster"]}
               // cols={row.featured ? 2 : 1}
               // rows={row.featured ? 2 : 1}
