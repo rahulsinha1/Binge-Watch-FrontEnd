@@ -168,10 +168,14 @@ export default function MovieFun() {
               <Link to={"/moviedetail/" + row["name"]}>
                 <img src={row["poster"]} alt={row["name"] } />
               </Link>
-              {localStorage.getItem("username") ? (
+              {localStorage.getItem("role")!=="CRITIC"&&localStorage.getItem("username") ? (
+
+
+
                 <GridListTileBar
                   title={row["name"]}
                   titlePosition="top"
+                  
                   
                   actionIcon={
                     <IconButton

@@ -144,6 +144,8 @@ export default function MovieFun(name) {
       )
       .then(function (response) {
         console.log(response);
+        window.location.href = "/movieDetail/" + name["name"];
+
       });
   }
 
@@ -175,15 +177,18 @@ export default function MovieFun(name) {
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <h3>
             <text key={movieDetail["name"]}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={function () {
-                  addWatchList(name);
-                }}
-              >
-                Add to watchlist
-              </Button>
+              {localStorage.getItem("role")==="CRITIC"?
+              ""
+              :<Button
+              variant="contained"
+              color="primary"
+              onClick={function () {
+                addWatchList(name);
+              }}
+            >
+              Add to watchlist
+            </Button>}
+              
               <h1>{movieDetail["name"]}</h1>
 
               <img src={movieDetail["poster"]} alt={movieDetail["name"]} />
