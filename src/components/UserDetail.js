@@ -65,6 +65,37 @@ export default function UserDetail(name) {
       });
   }
 
+  function removeMovie(params) {
+    axios
+      .get(
+        "http://localhost:8080/api/user/remove/watchlist/" +
+          name["name"] +
+          "/" +
+          params
+      )
+      .then(function(result){
+        console.log(result);
+        // setRedirect(true);
+        window.location.href = ("/userDetail/" + name["name"]);
+      })
+
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function deleteFollowing(params){
+    axios
+    .get("http://localhost:8080/api/user/unfollow/" +name["name"] +"/"+ params)
+    .then(function(response){
+        console.log(response);
+        window.location.href = ("/userDetail/" + name["name"]);
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+}
+
   useEffect(() => {
     console.log(name);
     search(name);
@@ -96,7 +127,9 @@ export default function UserDetail(name) {
             <TableCell>Movie Name</TableCell>
             <TableCell>Imdb Rating</TableCell>
             <TableCell>Genre</TableCell>
-            <TableCell>Year</TableCell>
+            <TableCell>Year</TableCell>{localStorage.getItem("role")==="ADMIN"? 
+            <TableCell>Action</TableCell> :""
+            }
           </TableRow>
         </TableHead>
         <TableBody>
@@ -108,6 +141,17 @@ export default function UserDetail(name) {
               <TableCell>{row["imdbRating"]}</TableCell>
               <TableCell>{row["genre"]}</TableCell>
               <TableCell>{row["year"]}</TableCell>
+              {localStorage.getItem("role")==="ADMIN"? 
+            <TableCell>
+              
+
+              <Button variant="contained" color="primary" onClick={function(){
+                removeMovie(row["name"]);
+              }    }>
+                Delete for {name["name"]}
+              </Button>
+            </TableCell> :""
+            }
             </TableRow>
           ))}
         </TableBody>
@@ -127,6 +171,7 @@ export default function UserDetail(name) {
                 <Link to={"/userDetail/" + row["username"]}>
                   {row["username"]}
                 </Link>
+                
               </TableCell>
             </TableRow>
           ))}
@@ -138,7 +183,9 @@ export default function UserDetail(name) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>User Name</TableCell>
+            <TableCell>User Name</TableCell>{localStorage.getItem("role")==="ADMIN"? 
+            <TableCell>Action</TableCell> :""
+            }
           </TableRow>
         </TableHead>
         <TableBody>
@@ -149,6 +196,17 @@ export default function UserDetail(name) {
                   {row["username"]}
                 </Link>
               </TableCell>
+              {localStorage.getItem("role")==="ADMIN"? 
+            <TableCell>
+              
+
+              <Button variant="contained" color="primary" onClick={function(){
+                deleteFollowing(row["username"]);
+              }    }>
+                Delete for {name["name"]}
+              </Button>
+            </TableCell> :""
+            }
             </TableRow>
           ))}
         </TableBody>

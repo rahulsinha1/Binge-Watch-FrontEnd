@@ -48,7 +48,6 @@ function Navigation() {
               onClick={function () {
                 logout()
               }}
-              href="/movie"
               variant="contained"
             >
               logout

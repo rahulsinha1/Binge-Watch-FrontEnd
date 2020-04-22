@@ -17,51 +17,60 @@ import {
 import Navigation from "./Navigation";
 
 export default function UserInteraction() {
+  const [followerList, setFollowerList] = useState([]);
+  const [followingList, setFollowingList] = useState([]);
 
-    const [followerList, setFollowerList] = useState([]);
-    const [followingList, setFollowingList] = useState([]);
+  function getFollowers() {
+    axios
+      .get(
+        "http://localhost:8080/api/user/get/followers/" +
+          localStorage.getItem("username")
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setFollowerList([].concat(response.data));
+      });
+  }
 
-    function getFollowers() {
-        axios
-          .get("http://localhost:8080/api/user/get/followers/" + localStorage.getItem("username"))
-          .then(function (response) {
-            console.log(response.data);
-            setFollowerList([].concat(response.data));
-          });
-      }
-    
-      function getFollowering() {
-        axios
-          .get("http://localhost:8080/api/user/get/following/" + localStorage.getItem("username"))
-          .then(function (response) {
-            console.log(response.data);
-            setFollowingList([].concat(response.data));
-          });
-      }
-      function deleteFollowing(name){
-          axios
-          .get("http://localhost:8080/api/user/unfollow/" +localStorage.getItem("username") +"/"+ name)
-          .then(function(response){
-              console.log(response);
-              window.location.href = "/userinteraction/"+localStorage.getItem("username");
-          })
-          .catch(function(error){
-              console.log(error);
-          })
-      }
+  function getFollowering() {
+    axios
+      .get(
+        "http://localhost:8080/api/user/get/following/" +
+          localStorage.getItem("username")
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setFollowingList([].concat(response.data));
+      });
+  }
+  function deleteFollowing(name) {
+    axios
+      .get(
+        "http://localhost:8080/api/user/unfollow/" +
+          localStorage.getItem("username") +
+          "/" +
+          name
+      )
+      .then(function (response) {
+        console.log(response);
+        window.location.href =
+          "/userinteraction/" + localStorage.getItem("username");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-useEffect(()=>{
+  useEffect(() => {
     getFollowering();
     getFollowers();
-},[])
-    return(
-        <div>
-            <Navigation/>
-            <h3>
-                hi{localStorage.getItem("username")}
-            </h3>
+  }, []);
+  return (
+    <div>
+      <Navigation />
+      <h3>hi{localStorage.getItem("username")}</h3>
 
-    <h4> Your Follower: </h4>
+      <h4> Your Follower: </h4>
       <Table>
         <TableHead>
           <TableRow>
@@ -82,7 +91,7 @@ useEffect(()=>{
       </Table>
 
       <br />
-          <h4> You are Following: </h4>
+      <h4> You are Following: </h4>
       <Table>
         <TableHead>
           <TableRow>
@@ -95,16 +104,21 @@ useEffect(()=>{
               <TableCell component="th" scope="row">
                 <Link to={"/userDetail/" + row["username"]}>
                   {row["username"]}
-                  
-                </Link><Button onClick={function(){
-                  deleteFollowing(row["username"])
-                }} variant="contained" color="primary">unfollow </Button>
+                </Link>
+                <Button
+                  onClick={function () {
+                    deleteFollowing(row["username"]);
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  unfollow{" "}
+                </Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-        </div>
-    )
-    
+    </div>
+  );
 }

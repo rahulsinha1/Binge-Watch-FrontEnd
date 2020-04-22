@@ -39,7 +39,7 @@ export default function WatchList() {
       .then(function (response) {
         console.log(response);
         // window.location.href = {"/watchlist/" + localStorage.getItem("username")};
-        setRedirect(true);
+        window.location.href = "/watchlist/"+ localStorage.getItem("username") ;
       })
       .catch(function (error) {
         console.log(error);
@@ -137,7 +137,7 @@ export default function WatchList() {
                   fullwidth="true"
                 >
                   <Button variant="contained" color="primary" type="submit">
-                    Add movie to watchList
+                    Search to add to watchList
                   </Button>
                 </Grid>
               </Grid>
@@ -159,13 +159,15 @@ export default function WatchList() {
             <TableBody>
               {watchList.map((row) => (
                 <TableRow key={row["id"]}>
+
                   <TableCell component="th" scope="row">
-                    {row["name"]}
+                  <Link to={"/movieDetail/" + row["name"]}>{row["name"]}</Link>
+     
                   </TableCell>
                   <TableCell>{row["genre"]}</TableCell>
 
                   <TableCell>
-                    <Button
+                    <Button variant="contained" color="primary"
                       onClick={function () {
                         removeMovie(row["name"]);
                       }}

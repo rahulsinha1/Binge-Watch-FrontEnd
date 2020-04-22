@@ -54,8 +54,8 @@ export default function MovieFun() {
     axios
       .get("http://localhost:8080/api/movies")
       .then(function (response) {
-        console.log(response);
-        console.log(response["data"]);
+        // console.log(response);
+        // console.log(response["data"]);
         setMovieList([].concat(response["data"]));
       })
       .catch(function (error) {
@@ -149,8 +149,8 @@ export default function MovieFun() {
           {movieList.map((row) => (
             <GridListTile
               key={row["poster"]}
-              cols={row.featured ? 2 : 1}
-              rows={row.featured ? 2 : 1}
+              // cols={row.featured ? 2 : 1}
+              // rows={row.featured ? 2 : 1}
             >
               <Link to={"/moviedetail/" + row["name"]}>
                 <img src={row["poster"]} alt={row["name"]} />

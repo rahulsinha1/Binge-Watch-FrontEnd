@@ -202,11 +202,11 @@ export default function Profile() {
       .post(
         "http://localhost:8080/api/user/removePhone/" +
           localStorage.getItem("username"),
-        result
+        params
       )
       .then(function (response) {
         console.log(response);
-        // window.location.href = "/profile";
+        window.location.href = "/profile";
       });
   }
   // useEffect(() => {
