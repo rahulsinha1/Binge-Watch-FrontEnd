@@ -53,7 +53,9 @@ function Navigation() {
               logout
             </Button>
 
-            
+            <Button href={"/userDetail/"+localStorage.getItem("username") }variant="contained">
+              user Detail
+            </Button>
 
             <Button href="/profile" variant="contained">
               profile
