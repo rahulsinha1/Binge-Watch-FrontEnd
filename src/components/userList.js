@@ -44,7 +44,7 @@ export default function UserList() {
 
   function getUserList() {
     axios
-      .get("http://localhost:8083//api/users/select/all")
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083//api/users/select/all")
       .then(function (response) {
         console.log(response);
         setUserList([].concat(response["data"]));
@@ -56,7 +56,7 @@ export default function UserList() {
 
   function deleteUser(param) {
     axios
-      .get("http://localhost:8083//api/user/delete/" + param)
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083//api/user/delete/" + param)
       .then(function (response) {
         console.log(response);
         alert("user deleated");
@@ -70,7 +70,7 @@ export default function UserList() {
 
   function updateRoleUser(param) {
     axios
-      .get("http://localhost:8083//api/user/updateRole/" + param + "/" + "USER")
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083//api/user/updateRole/" + param + "/" + "USER")
       .then(function (response) {
         console.log(response);
         window.location.href = "/userList/";
@@ -79,7 +79,7 @@ export default function UserList() {
   function updateRoleCritic(param) {
     axios
       .get(
-        "http://localhost:8083//api/user/updateRole/" + param + "/" + "CRITIC"
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083//api/user/updateRole/" + param + "/" + "CRITIC"
       )
       .then(function (response) {
         console.log(response);
@@ -89,7 +89,7 @@ export default function UserList() {
   function updateRoleAdmin(param) {
     axios
       .get(
-        "http://localhost:8083//api/user/updateRole/" + param + "/" + "ADMIN"
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083//api/user/updateRole/" + param + "/" + "ADMIN"
       )
       .then(function (response) {
         console.log(response);
@@ -103,7 +103,7 @@ export default function UserList() {
       pass: params["pass"],
       role: params["role"].toUpperCase(),
     };
-    fetch("http://localhost:8083/api/user/create", {
+    fetch("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/create", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {

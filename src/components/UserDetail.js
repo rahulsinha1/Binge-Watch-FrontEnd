@@ -35,7 +35,7 @@ export default function UserDetail(name) {
 
   function search(params) {
     axios
-      .get("http://localhost:8083/api/user/find/username/" + params["name"])
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/find/username/" + params["name"])
       .then(function (response) {
         // console.log(response);
         // console.log(response.data.watchList);
@@ -50,7 +50,7 @@ export default function UserDetail(name) {
 
   function getFollowers() {
     axios
-      .get("http://localhost:8083/api/user/get/followers/" + name["name"])
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/get/followers/" + name["name"])
       .then(function (response) {
         console.log(response.data);
         setFollowerList([].concat(response.data));
@@ -59,7 +59,7 @@ export default function UserDetail(name) {
 
   function getFollowering() {
     axios
-      .get("http://localhost:8083/api/user/get/following/" + name["name"])
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/get/following/" + name["name"])
       .then(function (response) {
         console.log(response.data);
         setFollowingList([].concat(response.data));
@@ -69,7 +69,7 @@ export default function UserDetail(name) {
   function removeMovie(params) {
     axios
       .get(
-        "http://localhost:8083/api/user/remove/watchlist/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/remove/watchlist/" +
           name["name"] +
           "/" +
           params
@@ -87,7 +87,7 @@ export default function UserDetail(name) {
 
   function deleteFollowing(params){
     axios
-    .get("http://localhost:8083/api/user/unfollow/" +name["name"] +"/"+ params)
+    .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/unfollow/" +name["name"] +"/"+ params)
     .then(function(response){
         console.log(response);
         window.location.href = ("/userDetail/" + name["name"]);
@@ -100,7 +100,7 @@ export default function UserDetail(name) {
 function getCritic(){
 
   axios
-  .get("http://localhost:8083/api/movieReview/find/user/"+ name["name"])
+  .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/movieReview/find/user/"+ name["name"])
   .then(function(response){
     console.log(response);
     setListReview([].concat(response.data));

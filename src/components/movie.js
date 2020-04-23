@@ -65,7 +65,7 @@ export default function MovieFun() {
 
   function getMovieList() {
     axios
-      .get("http://localhost:8083/api/movies")
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/movies")
       .then(function (response) {
         // console.log(response);
         // console.log(response["data"]);
@@ -78,7 +78,7 @@ export default function MovieFun() {
   function addWatchList(params) {
     axios
       .get(
-        "http://localhost:8083/api/user/add/watchlist/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/add/watchlist/" +
           localStorage.getItem("username") +
           "/" +
           params
@@ -98,7 +98,7 @@ export default function MovieFun() {
 
   function search(params) {
     axios
-      .get("http://localhost:8083/api/movies/find/", {
+      .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/movies/find/", {
         params: { name: params["name"] },
       })
       .then(function (response) {

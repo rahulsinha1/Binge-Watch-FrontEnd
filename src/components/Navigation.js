@@ -25,7 +25,7 @@ function Navigation() {
   // }
   var role = localStorage.getItem("role");
   function logout() {
-    fetch("http://localhost:8083/api/user/logout", {
+    fetch("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/logout", {
       method: "POST",
       credentials: "include",
     })

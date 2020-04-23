@@ -26,7 +26,7 @@ export default function LoginPage() {
     const login_status = false;
     try {
       axios
-      .post("http://localhost:8083/api/user/login", state)
+      .post("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/login", state)
       .then(function (response) {
         console.log(response);
         if(response.data===""){
@@ -55,7 +55,7 @@ export default function LoginPage() {
       //   console.log(error);
       // });
       ;
-    // fetch("http://localhost:8083/api/user/login", {
+    // fetch("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/login", {
     //   method: "POST",
     //   body: JSON.stringify(state),
     //   headers: {
@@ -69,7 +69,7 @@ export default function LoginPage() {
     //     console.log(error);
     //   });
     // axios
-    // .get("http://localhost:8083//api/user/find/username/"+loginUser.username)
+    // .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083//api/user/find/username/"+loginUser.username)
     // .then(function (response) {
     //   // console.log(response.data["pass"])
     //   // console.log(response);

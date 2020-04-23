@@ -56,7 +56,7 @@ export default function Profile() {
     };
     axios
       .post(
-        "http://localhost:8083/api/user/addAddress/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/addAddress/" +
           localStorage.getItem("username"),
         state
       )
@@ -81,7 +81,7 @@ export default function Profile() {
     console.log(state);
     axios
       .post(
-        "http://localhost:8083/api/user/addPhone/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/addPhone/" +
           localStorage.getItem("username"),
         state
       )
@@ -101,7 +101,7 @@ export default function Profile() {
     console.log(state);
     axios
       .post(
-        "http://localhost:8083/api/user/find/username/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/find/username/" +
           localStorage.getItem("username"),
         state
       )
@@ -130,7 +130,7 @@ export default function Profile() {
   //   console.log(state);
   //   axios
   //     .post(
-  //       "http://localhost:8083/api/user/addPhone/" +
+  //       "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/addPhone/" +
   //         localStorage.getItem("username"),
   //       state
   //     )
@@ -154,7 +154,7 @@ export default function Profile() {
     console.log(state);
     axios
       .post(
-        "http://localhost:8083/api/user/update/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/update/" +
           localStorage.getItem("username"),
         state
       )
@@ -175,7 +175,7 @@ export default function Profile() {
     
 
     // axios
-    //   .post("http://localhost:8083/api/user/update", state)
+    //   .post("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/update", state)
     //   .then(function (response) {
     //     console.log(response);
     // localStorage.setItem("username", response.data.username);
@@ -200,7 +200,7 @@ export default function Profile() {
     console.log(result);
     axios
       .post(
-        "http://localhost:8083/api/user/removePhone/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/removePhone/" +
           localStorage.getItem("username"),
         params
       )
@@ -211,7 +211,7 @@ export default function Profile() {
   }
   // useEffect(() => {
   //   axios
-  //     .get("http://localhost:8083/api/user/currentUser")
+  //     .get("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/currentUser")
   //     .then(function (response) {
   //       console.log(this);
   //       if (response["date"] !== "") {
@@ -228,7 +228,7 @@ export default function Profile() {
 
   // componentDidMount() {
 
-  //   // fetch("http://localhost:8083/api/user/currentUser", {
+  //   // fetch("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/currentUser", {
   //   //   method: "GET",
   //   //   credentials: "include",
   //   // })
@@ -245,7 +245,7 @@ export default function Profile() {
   // }
 
   function profile() {
-    fetch("http://localhost:8083/api/user/logout", {
+    fetch("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8083/api/user/logout", {
       method: "POST",
       credentials: "include",
     })
