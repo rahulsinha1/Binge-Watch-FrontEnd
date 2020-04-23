@@ -23,7 +23,7 @@ export default function UserInteraction() {
   function getFollowers() {
     axios
       .get(
-        "http://localhost:8080/api/user/get/followers/" +
+        "http://localhost:8083/api/user/get/followers/" +
           localStorage.getItem("username")
       )
       .then(function (response) {
@@ -35,7 +35,7 @@ export default function UserInteraction() {
   function getFollowering() {
     axios
       .get(
-        "http://localhost:8080/api/user/get/following/" +
+        "http://localhost:8083/api/user/get/following/" +
           localStorage.getItem("username")
       )
       .then(function (response) {
@@ -46,7 +46,7 @@ export default function UserInteraction() {
   function deleteFollowing(name) {
     axios
       .get(
-        "http://localhost:8080/api/user/unfollow/" +
+        "http://localhost:8083/api/user/unfollow/" +
           localStorage.getItem("username") +
           "/" +
           name

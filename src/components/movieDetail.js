@@ -35,7 +35,7 @@ export default function MovieFun(name) {
 
   // function getMovieList() {
   //   axios
-  //     .get("http://localhost:8080/api/movies")
+  //     .get("http://localhost:8083/api/movies")
   //     .then(function (response) {
   //       console.log(response);
   //       setMovieList([].concat(response["data"]));
@@ -48,7 +48,7 @@ export default function MovieFun(name) {
   function addWatchList(name) {
     axios
       .get(
-        "http://localhost:8080/api/user/add/watchlist/" +
+        "http://localhost:8083/api/user/add/watchlist/" +
           localStorage.getItem("username") +
           "/" +
           name["name"]
@@ -65,7 +65,7 @@ export default function MovieFun(name) {
 
   function search(params) {
     axios
-      .get("http://localhost:8080/api/movies/find/?name=" + params["name"])
+      .get("http://localhost:8083/api/movies/find/?name=" + params["name"])
       .then(function (response) {
         // console.log(response);
         setMovieDetail(response.data);
@@ -78,7 +78,7 @@ export default function MovieFun(name) {
   function followUser(userName) {
     axios
       .get(
-        "http://localhost:8080/api/user/follow/" +
+        "http://localhost:8083/api/user/follow/" +
           localStorage.getItem("username") +
           "/" +
           userName
@@ -93,7 +93,7 @@ export default function MovieFun(name) {
   }
   function getStreamer() {
     axios
-      .get("http://localhost:8080//api/streamers/find/" + name["name"])
+      .get("http://localhost:8083//api/streamers/find/" + name["name"])
       .then(function (response) {
         console.log(response);
         setListStreamer([].concat(response.data));
@@ -102,7 +102,7 @@ export default function MovieFun(name) {
 
   function getListUser() {
     axios
-      .get("http://localhost:8080//api/likedBy/" + name["name"])
+      .get("http://localhost:8083//api/likedBy/" + name["name"])
       .then(function (response) {
         // console.log(response.data);
         setListUser([].concat(response.data));
@@ -114,7 +114,7 @@ export default function MovieFun(name) {
 
   function deleteStreamer(params) {
     axios
-      .get("http://localhost:8080//api/streamers/delete/" + params)
+      .get("http://localhost:8083//api/streamers/delete/" + params)
       .then(function (response) {
         // console.log(response.data);
         window.location.href = "/movieDetail/" + name["name"];
@@ -131,7 +131,7 @@ export default function MovieFun(name) {
     };
     axios
       .post(
-        "http://localhost:8080/api/user/addmovieReview/" +
+        "http://localhost:8083/api/user/addmovieReview/" +
           localStorage.getItem("username") +
           "/" +
           name["name"],
@@ -152,7 +152,7 @@ export default function MovieFun(name) {
 
   function showReview(name){
       axios
-      .get("http://localhost:8080/api/movieReview/find/"+ name["name"])
+      .get("http://localhost:8083/api/movieReview/find/"+ name["name"])
       .then(function(response){
         console.log(response);
         setListREview([].concat(response.data));

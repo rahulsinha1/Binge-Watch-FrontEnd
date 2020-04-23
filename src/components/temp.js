@@ -51,7 +51,7 @@ export default function MovieFun() {
       
         function getMovieList() {
           axios
-            .get("http://localhost:8080/api/movies")
+            .get("http://localhost:8083/api/movies")
             .then(function (response) {
               console.log(response);
               setMovieList([].concat(response["data"]));
@@ -64,7 +64,7 @@ export default function MovieFun() {
         function search(params) {
             axios
               .get(
-                "http://localhost:8080/api/movies/find/?name=" +
+                "http://localhost:8083/api/movies/find/?name=" +
                   params["name"] 
               )
               .then(function (response) {

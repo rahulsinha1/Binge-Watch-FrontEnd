@@ -49,7 +49,7 @@ function App() {
   const classes = useStyles();
 
   var logout = () =>
-    fetch("http://localhost:8080/api/user/logout", {
+    fetch("http://localhost:8083/api/user/logout", {
       method: "POST",
       credentials: "include",
     })
@@ -63,7 +63,7 @@ function App() {
 
   function getUserList() {
     axios
-      .get("http://localhost:8080//api/users/select/all")
+      .get("http://localhost:8083//api/users/select/all")
       .then(function (response) {
         console.log(response);
         setUserList([].concat(response["data"]));
