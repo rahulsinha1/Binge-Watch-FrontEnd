@@ -31,7 +31,7 @@ export default function WatchList() {
   function addWatchList(params) {
     axios
       .get(
-        "http://localhost:8080/api/user/add/watchlist/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8080/api/user/add/watchlist/" +
           localStorage.getItem("username") +
           "/" +
           params["movieName"]
@@ -52,7 +52,7 @@ export default function WatchList() {
   function getWatchList() {
     axios
       .get(
-        "http://localhost:8080/api/user/get/watchlist/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8080/api/user/get/watchlist/" +
           localStorage.getItem("username")
       )
 
@@ -68,7 +68,7 @@ export default function WatchList() {
   function removeMovie(params) {
     axios
       .get(
-        "http://localhost:8080/api/user/remove/watchlist/" +
+        "http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8080/api/user/remove/watchlist/" +
           localStorage.getItem("username") +
           "/" +
           params

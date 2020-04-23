@@ -49,7 +49,7 @@ export default function SignUpPage() {
       pass: params["pass"],
       role: params["role"].toUpperCase(),
     };
-    fetch("http://localhost:8080/api/user/create", {
+    fetch("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8080/api/user/create", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
@@ -74,7 +74,7 @@ export default function SignUpPage() {
     //   role: params["role"].toUpperCase(),
     // };
     // axios
-    //   .post("http://localhost:8080/api/user/create", newUser)
+    //   .post("http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8080/api/user/create", newUser)
     //   .then(function (response) {
     //     console.log(response);
     //     setRedirect(true);

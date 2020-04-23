@@ -16,7 +16,7 @@ import axios from "axios";
      submitHandler=e=>{
          e.preventDefault()
          console.log(this.state)
-         axios.post('http://localhost:8080/api/user/create',this.state)
+         axios.post('http://ec2-18-220-141-147.us-east-2.compute.amazonaws.com:8080/api/user/create',this.state)
          .then(response=>{
             console.log(response)
          })
