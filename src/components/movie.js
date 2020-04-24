@@ -67,7 +67,7 @@ export default function MovieFun() {
     axios
       .get("http://localhost:8080/api/movies")
       .then(function (response) {
-        // console.log(response);
+        console.log(response);
         // console.log(response["data"]);
         setMovieList([].concat(response["data"]));
       })
@@ -111,6 +111,28 @@ export default function MovieFun() {
         console.log(error);
         alert("could not find it : ( try a different name?")
       });
+  }
+  function createMovie(params){
+    const state = {
+      name: params["movieName"],
+      genre: params["genre"],
+      country: params["country"],
+      runtime: params["runtime"],
+      year: params["year"]
+    };
+    console.log(params);
+    axios
+    .post("http://localhost:8080/api/movies/create/?"+"country="+params["country"]+"&"+
+    "genre="+params["genre"]+"&"+
+    "name="+params["movieName"]+"&"+
+    "runtime="+params["runtime"]+"&"+
+    "year="+params["year"])
+    .then(function(response){
+      console.log(response)
+    })
+    .catch(function(error){
+      console.log(error);
+    })
   }
 
   useEffect(() => {
@@ -167,9 +189,97 @@ export default function MovieFun() {
           </form>
           {/* <Router> */}
 
+{localStorage.getItem("role")==="ADMIN"? 
+
+<form
+              noValidate
+              autoComplete="off"
+              onSubmit={handleSubmit(createMovie)}
+            >
+              <Grid
+                container
+                justify="center"
+                style={{ paddingBottom: "1rem" }}
+              >
+                <Grid  item xs={12} sm={12} md={12} lg={12}>
+                  <TextField required
+                    name="movieName"
+                    id="standard-basic1"
+                    label="Movie Name"
+                    fullwidth="true"
+                    inputRef={register}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <TextField required
+                    name="genre"
+                    id="standard-basic"
+                    label="genre"
+                    fullwidth="true"
+                    inputRef={register}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <TextField required
+                    name="country"
+                    id="standard-basic"
+                    label="country"
+                    fullwidth="true"
+                    inputRef={register}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <TextField required
+                    name="runtime"
+                    id="standard-basic"
+                    label="runtime"
+                    fullwidth="true"
+                    inputRef={register}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <TextField required
+                    name="year"
+                    id="standard-basic"
+                    label="year"
+                    fullwidth="true"
+                    inputRef={register}
+                  />
+                </Grid>
+
+
+              </Grid>
+              <Grid container item justify="center">
+                <Grid
+                  container
+                  justify="center"
+                  item
+                  xs={12}
+                  sm={12}
+                  md={5}
+                  lg={5}
+                  fullwidth="true"
+                >
+                  <Button variant="contained" color="primary" type="submit">
+                    Create a new Movie
+                  </Button>
+                </Grid>
+                <Grid
+                  container
+                  justify="center"
+                  item
+                  xs={12}
+                  sm={12}
+                  md={5}
+                  lg={5}
+                  fullwidth="true"
+                >
+                </Grid>
+              </Grid>
+            </form>: ""}
           {movieList.map((row) => (
             <GridListTile 
-              key={row["poster"]}
+              key={row["id"]}
               // cols={row.featured ? 2 : 1}
               // rows={row.featured ? 2 : 1}
             >

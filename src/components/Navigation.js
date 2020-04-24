@@ -94,7 +94,7 @@ function Navigation() {
               
             )} */}
         
-        {localStorage.getItem("role")!=="CRITIC"&&localStorage.getItem("username") ? (
+        {localStorage.getItem("role")!=="CRITIC"&&localStorage.getItem("role")!=="ADMIN"&&localStorage.getItem("username") ? (
               <Button
               href={"/watchlist/" + localStorage.getItem("username")}
               variant="contained"
